@@ -1,18 +1,18 @@
 package com.scrumble.boardapi;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Table @Entity
 public class Board {
-
-@Column
+    @Id @GeneratedValue
+    private int id;
+    @Column
     private String name;
     @Column
     private String description;
     @Column
-    private TimeStamp createdAt;
+    private LocalDate createdAt;
 
     public boolean joinBoard(User user){
 
