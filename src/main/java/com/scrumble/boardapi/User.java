@@ -17,18 +17,6 @@ public class User {
     @Column
     private Role role;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void register(User user) throws Exception {
         throw new Exception("Not implemented");
     }
@@ -37,7 +25,11 @@ public class User {
         throw new Exception("Not implemented");
     }
 
-    public boolean createBord(User user) throws Exception {
+    public boolean createBoard(User user) throws Exception {
+        throw new Exception("Not implemented");
+    }
+
+    public Board[] getBoards() throws Exception {
         throw new Exception("Not implemented");
     }
 }
