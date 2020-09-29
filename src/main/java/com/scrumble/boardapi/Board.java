@@ -2,47 +2,62 @@ package com.scrumble.boardapi;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
-@Table @Entity
+@Table
+@Entity
 public class Board {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private int id;
+
     @Column
     private String name;
+
     @Column
     private String description;
+
     @Column
     private LocalDate createdAt;
 
-    public boolean joinBoard(User user){
-
+    public boolean joinBoard(User user) {
+        throw new UnsupportedOperationException();
     }
-    public boolean updateRole(User user){
 
+    public boolean updateRole(User user) {
+        throw new UnsupportedOperationException();
     }
-    public boolean kickMember(User user){
 
+    public boolean kickMember(User user) {
+        throw new UnsupportedOperationException();
     }
-    public boolean leave(User user){
 
+    public boolean leave(User user) {
+        throw new UnsupportedOperationException();
     }
-    public boolean createList(User user){
 
+    public boolean createList(User user) {
+        throw new UnsupportedOperationException();
     }
-    public boolean createStory(User user){
 
+    public boolean createStory(User user) {
+        throw new UnsupportedOperationException();
     }
-    public boolean createTask(Task task){
 
+    public boolean createTask(Task task) {
+        throw new UnsupportedOperationException();
     }
-    public boolean createLabel(Label label){
 
+    public boolean createLabel(Label label) {
+        throw new UnsupportedOperationException();
     }
-    public boolean removeList(List list){
 
+    public boolean removeList(BoardList list) {
+        throw new UnsupportedOperationException();
     }
+
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -50,30 +65,34 @@ public class Board {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public TimeStamp getCreatedAt() {
-        return createdAt;
+    public LocalDate getCreatedAt() {
+        return this.createdAt;
     }
 
-    public void setCreatedAt(TimeStamp createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
-    public boolean removeList(List list){
 
+    public boolean removeList(List<BoardList> list) {
+        throw new UnsupportedOperationException();
     }
-    public User[] getBoardMembers(){
 
+    public List<User> getBoardMembers() {
+        throw new UnsupportedOperationException();
     }
-    public List[] getLists(){
 
+    public List<String> getLists() {
+        throw new UnsupportedOperationException();
     }
-    public getBurndownchart(){
 
+    public void getBurndownchart() {
+        throw new UnsupportedOperationException();
     }
 }
