@@ -1,15 +1,28 @@
 package com.scrumble.boardapi;
 
-<<<<<<< HEAD
-public class Task {
-=======
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table
 public class Task {
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @Column
     private String name;
+
+    @Column
     private String description;
+
+    @Column
     private boolean archived;
+
+    @Column
     private LocalDateTime deadline;
+
+    @Column
     private int scrumPoints;
 
     public boolean assignTask(User user) throws Exception {
@@ -35,5 +48,8 @@ public class Task {
     public boolean getLabels(User user) throws Exception {
         throw new Exception("Not implemented");
     }
->>>>>>> 187a464a3e4fa7332559cd6b67fc9d62d84d5c18
+
+    public int getId() {
+        return this.id;
+    }
 }

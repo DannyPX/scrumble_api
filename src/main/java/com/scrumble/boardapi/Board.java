@@ -95,4 +95,8 @@ public class Board {
     public void getBurndownchart() {
         throw new UnsupportedOperationException();
     }
+
+    public int getId() {
+        return this.id;
+    }
 }

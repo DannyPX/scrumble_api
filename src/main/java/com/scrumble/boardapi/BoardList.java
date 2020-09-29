@@ -1,10 +1,21 @@
 package com.scrumble.boardapi;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class BoardList {
-<<<<<<< HEAD
-=======
+    @Id
+    @GeneratedValue
+    private int Id;
+
+    @Column
     private String name;
+
+    @Column
     private String description;
+
+    @Column
     private boolean archived;
 
     public boolean updateList() throws Exception {
@@ -26,5 +37,8 @@ public class BoardList {
     public Task[] getStories() throws Exception {
         throw new Exception("Not implemented");
     }
->>>>>>> 187a464a3e4fa7332559cd6b67fc9d62d84d5c18
+
+    public int getId() {
+        return Id;
+    }
 }
