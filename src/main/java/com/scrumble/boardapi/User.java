@@ -1,20 +1,31 @@
 package com.scrumble.boardapi;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity @Table
+@Entity
+@Table
 public class User {
     @Id
     @GeneratedValue
     private int id;
+
     @Column
     private String username;
+
     @Column
     private String email;
+
     @Column
     private String password;
-    @Enumerated(EnumType.STRING)
+
     @Column
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public void register(User user) throws Exception {
