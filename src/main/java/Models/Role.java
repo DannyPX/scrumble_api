@@ -1,4 +1,4 @@
-package com.scrumble.boardapi;
+package Models;
 
 public enum Role {
     None,

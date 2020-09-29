@@ -1,4 +1,4 @@
-package com.scrumble.boardapi;
+package Models;
 
 import java.time.LocalDate;
 

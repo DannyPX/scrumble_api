@@ -1,18 +1,17 @@
-package com.scrumble.boardapi;
+package Models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
 
 @Entity
 @Table
-public class Task {
+public class BoardList {
     @Id
     @GeneratedValue
-    private int id;
+    private int Id;
 
     @Column
     private String name;
@@ -23,33 +22,27 @@ public class Task {
     @Column
     private boolean archived;
 
-    @Column
-    private LocalDateTime deadline;
-
-    @Column
-    private int scrumPoints;
-
-    public boolean assignTask(User user) throws Exception {
+    public boolean updateList() throws Exception {
         throw new Exception("Not implemented");
     }
 
-    public boolean removeAssignment(User user) throws Exception {
+    public boolean assignTask() throws Exception {
         throw new Exception("Not implemented");
     }
 
-    public boolean updateTask(User user) throws Exception {
+    public boolean removeTask() throws Exception {
         throw new Exception("Not implemented");
     }
 
-    public boolean assignLabel(User user) throws Exception {
+    public Task[] getTasks() throws Exception {
         throw new Exception("Not implemented");
     }
 
-    public boolean removeLabel(User user) throws Exception {
+    public Task[] getStories() throws Exception {
         throw new Exception("Not implemented");
     }
 
-    public boolean getLabels(User user) throws Exception {
-        throw new Exception("Not implemented");
+    public int getId() {
+        return Id;
     }
 }
