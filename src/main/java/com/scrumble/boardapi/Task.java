@@ -1,10 +1,5 @@
 package com.scrumble.boardapi;
-
-<<<<<<< HEAD
-public class Task {
-=======
 import java.time.LocalDateTime;
-
 public class Task {
     private String name;
     private String description;
@@ -35,5 +30,4 @@ public class Task {
     public boolean getLabels(User user) throws Exception {
         throw new Exception("Not implemented");
     }
->>>>>>> 187a464a3e4fa7332559cd6b67fc9d62d84d5c18
 }
