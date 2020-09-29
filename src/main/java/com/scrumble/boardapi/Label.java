@@ -19,11 +19,9 @@ public class Label {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-
-    private boolean updateLabel(Label label){
-
+    
+    private boolean updateLabel(Label label) throws Exception {
+        throw new Exception("Not implemented");
     }
 
     public String getColorHex() {
