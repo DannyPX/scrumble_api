@@ -1,14 +1,14 @@
 package RestControllers;
 
-import Repositories.UserRepository;
+import Models.User;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
-    private final UserRepository userRepository;
+    private final User user;
 
-    UserController(UserRepository userRepository)
+    UserController(User user)
     {
-        this.userRepository = userRepository;
+        this.user = user;
     }
 }
