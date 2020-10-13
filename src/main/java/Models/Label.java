@@ -19,23 +19,4 @@ public class Label {
     @Column
     private String colorHex;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    private boolean updateLabel(Label label) throws Exception {
-        throw new Exception("Not implemented");
-    }
-
-    public String getColorHex() {
-        return colorHex;
-    }
-
-    public void setColorHex(String colorHex) {
-        this.colorHex = colorHex;
-    }
 }
