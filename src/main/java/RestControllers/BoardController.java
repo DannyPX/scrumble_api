@@ -20,12 +20,8 @@ public class BoardController {
        return boardRepository.findAll();
     }
 
-
     @PostMapping("/board")
     ResponseEntity<Object> newBoard(@RequestBody Board newBoard) {
-
-        //return boardRepository.save(newBoard);
-        // fix pls q:-P
         return new ResponseEntity<>(boardRepository.save(newBoard),HttpStatus.I_AM_A_TEAPOT);
     }
 }

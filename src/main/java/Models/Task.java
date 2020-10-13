@@ -29,27 +29,5 @@ public class Task {
     @Column
     private int scrumPoints;
 
-    public boolean assignTask(User user) throws Exception {
-        throw new Exception("Not implemented");
-    }
 
-    public boolean removeAssignment(User user) throws Exception {
-        throw new Exception("Not implemented");
-    }
-
-    public boolean updateTask(User user) throws Exception {
-        throw new Exception("Not implemented");
-    }
-
-    public boolean assignLabel(User user) throws Exception {
-        throw new Exception("Not implemented");
-    }
-
-    public boolean removeLabel(User user) throws Exception {
-        throw new Exception("Not implemented");
-    }
-
-    public boolean getLabels(User user) throws Exception {
-        throw new Exception("Not implemented");
-    }
 }
