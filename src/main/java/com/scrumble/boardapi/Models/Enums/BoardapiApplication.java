@@ -1,4 +1,4 @@
-package com.scrumble.boardapi;
+package com.scrumble.boardapi.Models.Enums;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
