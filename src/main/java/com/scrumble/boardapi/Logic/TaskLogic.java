@@ -1,7 +1,7 @@
-package Logic;
+package com.scrumble.boardapi.Logic;
 
-import Models.Task;
-import Models.User;
+import com.scrumble.boardapi.Models.Task;
+import com.scrumble.boardapi.Models.User;
 
 public class TaskLogic {
 

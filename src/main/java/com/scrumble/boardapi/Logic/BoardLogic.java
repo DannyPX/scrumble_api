@@ -1,9 +1,9 @@
-package Logic;
+package com.scrumble.boardapi.Logic;
 
-import Models.Board;
-import Models.BoardList;
-import Models.BurnDownChart;
-import Models.Label;
+import com.scrumble.boardapi.Models.Board;
+import com.scrumble.boardapi.Models.BoardList;
+import com.scrumble.boardapi.Models.BurnDownChart;
+import com.scrumble.boardapi.Models.Label;
 
 import java.util.List;
 

@@ -1,15 +1,15 @@
-package Models;
+package com.scrumble.boardapi.Models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-@Entity
 @Table
-public class Task {
+@Entity
+public class Board {
     @Id
     @GeneratedValue
     private int id;
@@ -21,13 +21,6 @@ public class Task {
     private String description;
 
     @Column
-    private boolean archived;
-
-    @Column
-    private LocalDateTime deadline;
-
-    @Column
-    private int scrumPoints;
-
+    private LocalDate createdAt;
 
 }

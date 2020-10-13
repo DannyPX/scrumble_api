@@ -1,6 +1,6 @@
-package Logic;
+package com.scrumble.boardapi.Logic;
 
-import Models.BurnDownChart;
+import com.scrumble.boardapi.Models.BurnDownChart;
 
 public class BurnDownChartLogic {
     private final BurnDownChart burndownChart;

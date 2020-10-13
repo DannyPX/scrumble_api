@@ -1,6 +1,6 @@
-package Logic;
+package com.scrumble.boardapi.Logic;
 
-import Models.Label;
+import com.scrumble.boardapi.Models.Label;
 
 public class LabelLogic {
     private final Label label;

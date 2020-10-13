@@ -1,4 +1,4 @@
-package Models;
+package com.scrumble.boardapi.Models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,18 +8,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class BoardList {
+public class Label {
     @Id
     @GeneratedValue
-    private int Id;
-
-    @Column
-    private String name;
+    private int id;
 
     @Column
     private String description;
 
     @Column
-    private boolean archived;
+    private String colorHex;
 
 }

@@ -1,4 +1,4 @@
-package Models;
+package com.scrumble.boardapi.Models;
 
 import javax.persistence.*;
 

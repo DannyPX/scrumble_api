@@ -1,6 +1,6 @@
-package Logic;
+package com.scrumble.boardapi.Logic;
 
-import Models.Story;
+import com.scrumble.boardapi.Models.Story;
 
 public class StoryLogic {
     private final Story story;

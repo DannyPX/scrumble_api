@@ -1,7 +1,7 @@
-package RestControllers;
+package com.scrumble.boardapi.RestControllers;
 
-import Models.Board;
-import Repositories.BoardRepository;
+import com.scrumble.boardapi.Models.Board;
+import com.scrumble.boardapi.Repositories.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

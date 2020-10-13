@@ -1,7 +1,7 @@
-package Logic;
+package com.scrumble.boardapi.Logic;
 
-import Models.Board;
-import Models.User;
+import com.scrumble.boardapi.Models.Board;
+import com.scrumble.boardapi.Models.User;
 
 public class UserLogic {
     private final User user;

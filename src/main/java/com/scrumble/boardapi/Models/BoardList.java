@@ -1,4 +1,4 @@
-package Models;
+package com.scrumble.boardapi.Models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,10 +8,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Story {
+public class BoardList {
     @Id
     @GeneratedValue
-    private int id;
+    private int Id;
 
     @Column
     private String name;

@@ -1,6 +1,6 @@
-package Repositories;
+package com.scrumble.boardapi.Repositories;
 
-import Models.User;
+import com.scrumble.boardapi.Models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

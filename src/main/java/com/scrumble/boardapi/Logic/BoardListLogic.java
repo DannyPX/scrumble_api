@@ -1,6 +1,6 @@
-package Logic;
+package com.scrumble.boardapi.Logic;
 
-import Models.BoardList;
+import com.scrumble.boardapi.Models.BoardList;
 
 public class BoardListLogic {
 

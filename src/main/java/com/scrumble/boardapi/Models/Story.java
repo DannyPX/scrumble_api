@@ -1,16 +1,14 @@
-package Models;
+package com.scrumble.boardapi.Models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDate;
-import java.util.List;
 
-@Table
 @Entity
-public class Board {
+@Table
+public class Story {
     @Id
     @GeneratedValue
     private int id;
@@ -22,6 +20,6 @@ public class Board {
     private String description;
 
     @Column
-    private LocalDate createdAt;
+    private boolean archived;
 
 }
