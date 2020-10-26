@@ -1,10 +1,10 @@
 package com.scrumble.boardapi.Repositories;
 
-import com.scrumble.boardapi.Models.Board;
+import com.scrumble.boardapi.Models.Story;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BoardRepository extends CrudRepository<Board, Integer> {
+public interface IStoryRepository extends CrudRepository<Story, Integer> {
 
 }

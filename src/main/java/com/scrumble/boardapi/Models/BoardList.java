@@ -22,4 +22,69 @@ public class BoardList {
     @Column
     private boolean archived;
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
+    }
+
+    public static class Builder{
+        private int Id;
+        private final String name;
+        private String description;
+        private boolean archived;
+
+        public Builder(String name) {
+            this.name = name;
+        }
+
+        public Builder id(int id) {
+            this.Id = id;
+            return this;
+        }
+
+        public Builder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder archived(boolean archived) {
+            this.archived = archived;
+            return this;
+        }
+
+        public BoardList build() {
+            BoardList boardList = new BoardList();
+            boardList.setName(name);
+            boardList.setDescription(description);
+            boardList.setArchived(archived);
+            return boardList;
+        }
+    }
 }

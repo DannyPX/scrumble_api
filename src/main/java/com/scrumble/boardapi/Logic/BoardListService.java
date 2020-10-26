@@ -2,11 +2,13 @@ package com.scrumble.boardapi.Logic;
 
 import com.scrumble.boardapi.Models.BoardList;
 
-public class BoardListLogic {
+public class BoardListService {
+
+    
 
     private final BoardList boardList;
 
-    BoardListLogic(BoardList boardList)
+    BoardListService(BoardList boardList)
     {
         this.boardList = boardList;
     }
@@ -23,11 +25,11 @@ public class BoardListLogic {
         throw new Exception("Not implemented");
     }
 
-    public TaskLogic[] getTasks() throws Exception {
+    public TaskService[] getTasks() throws Exception {
         throw new Exception("Not implemented");
     }
 
-    public TaskLogic[] getStories() throws Exception {
+    public TaskService[] getStories() throws Exception {
         throw new Exception("Not implemented");
     }
 }

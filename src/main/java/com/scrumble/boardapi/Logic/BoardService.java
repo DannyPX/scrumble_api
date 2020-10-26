@@ -4,20 +4,50 @@ import com.scrumble.boardapi.Models.Board;
 import com.scrumble.boardapi.Models.BoardList;
 import com.scrumble.boardapi.Models.BurnDownChart;
 import com.scrumble.boardapi.Models.Label;
+import com.scrumble.boardapi.Repositories.BoardRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class BoardLogic {
+@Service
+public class BoardService {
 
-    private final Board board;
+    @Autowired
+    private BoardRepository boardRepository;
 
-    BoardLogic(Board board)
+    //private final Board board;
+
+    BoardService(Board board)
     {
-        this.board = board;
+        //this.board = board;
+    }
+
+    public BoardService() {}
+
+    public Board createBoard(final Board board) {
+        board.setCreatedAt(LocalDate.now());
+
+        return boardRepository.save(board);
+    }
+
+    public Board getById(int id) {
+        Optional<Board> board = boardRepository.findById(id);
+
+        return board.isEmpty() ? null : board.get();
+    }
+
+    public List<Board> getAll() {
+        var boards = new ArrayList<Board>();
+         boardRepository.findAll().forEach(boards::add);
+         return boards;
     }
 
     public boolean joinBoard(UserLogic user) {
-        throw new UnsupportedOperationException();
+        return false;
     }
 
     public UserLogic updateRole(UserLogic user) {
@@ -36,11 +66,11 @@ public class BoardLogic {
         throw new UnsupportedOperationException();
     }
 
-    public StoryLogic createStory(UserLogic user) {
+    public StoryService createStory(UserLogic user) {
         throw new UnsupportedOperationException();
     }
 
-    public TaskLogic createTask(TaskLogic task) {
+    public TaskService createTask(TaskService task) {
         throw new UnsupportedOperationException();
     }
 
