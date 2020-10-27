@@ -28,7 +28,7 @@ public class BoardService {
 
     public BoardService() {}
 
-    public Board createBoard(final Board board) {
+    public Board create(final Board board) {
         board.setCreatedAt(LocalDate.now());
 
         return boardRepository.save(board);

@@ -39,15 +39,15 @@ public class TaskController {
 
     @PutMapping("/tasks/{id}")
     public ResponseEntity<Task> updateTask(@PathVariable int id, @RequestBody UpdateTaskResource newTask) {
-        Task task = taskService.getById(id);
+        Task existing = taskService.getById(id);
 
-        if (task == null) {
+        if (existing == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        task.setName(newTask.getName());
-        task.setDescription(newTask.getDescription());
+        existing.setName(newTask.getName());
+        existing.setDescription(newTask.getDescription());
 
-        return new ResponseEntity<>(taskService.update(task), HttpStatus.OK);
+        return new ResponseEntity<>(taskService.update(existing), HttpStatus.OK);
     }
 }

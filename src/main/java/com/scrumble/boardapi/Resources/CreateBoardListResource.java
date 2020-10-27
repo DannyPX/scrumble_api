@@ -1,6 +1,6 @@
 package com.scrumble.boardapi.Resources;
 
-public class CreateBoardResource {
+public class CreateBoardListResource {
     private String name;
     private String description;
 

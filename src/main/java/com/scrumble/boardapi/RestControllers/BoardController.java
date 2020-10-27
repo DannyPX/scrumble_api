@@ -32,7 +32,7 @@ public class BoardController {
                 .description(board.getDescription())
                 .build();
 
-        return new ResponseEntity<>(boardService.createBoard(newBoard), HttpStatus.OK);
+        return new ResponseEntity<>(boardService.create(newBoard), HttpStatus.OK);
     }
 
 //    @DeleteMapping("/boards/{id}")

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.print.DocFlavor;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -77,7 +78,6 @@ public class Task {
     }
 
     public static class Builder {
-        private int id;
         private final String name;
         private String description;
         private boolean archived;
@@ -86,11 +86,6 @@ public class Task {
 
         public Builder(String name) {
             this.name = name;
-        }
-
-        public Builder id(int id) {
-            this.id = id;
-            return this;
         }
 
         public Builder description(String description) {

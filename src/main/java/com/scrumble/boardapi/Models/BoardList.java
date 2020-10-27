@@ -55,18 +55,12 @@ public class BoardList {
     }
 
     public static class Builder{
-        private int Id;
         private final String name;
         private String description;
         private boolean archived;
 
         public Builder(String name) {
             this.name = name;
-        }
-
-        public Builder id(int id) {
-            this.Id = id;
-            return this;
         }
 
         public Builder description(String description) {
