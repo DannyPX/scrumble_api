@@ -30,7 +30,6 @@ public class BoardService {
 
     public Board create(final Board board) {
         board.setCreatedAt(LocalDate.now());
-
         return boardRepository.save(board);
     }
 

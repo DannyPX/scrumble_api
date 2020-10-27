@@ -10,7 +10,7 @@ public class LabelLogic {
         this.label = label;
     }
 
-    private Label updateLabel(Label label) throws Exception {
+    public Label updateLabel(Label label) throws Exception {
         throw new Exception("Not implemented");
     }
 
