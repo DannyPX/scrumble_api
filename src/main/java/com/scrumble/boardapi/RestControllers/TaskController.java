@@ -40,38 +40,26 @@ public class TaskController {
 
     @PostMapping("/tasks")
     public ResponseEntity<Task> newTask(@RequestBody CreateTaskResource newTask) {
-        if (newTask.getListId() != 0) {
             BoardList boardList = boardListService.getById(newTask.getListId());
 
-            if (boardList == null) {
+            if (boardList == null && newTask.getListId() != 0) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            Story story = storyService.getById(newTask.getStoryId());
+
+            if (story == null && newTask.getStoryId() != 0) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
 
             Task task = new Task.Builder(newTask.getName())
+                    .story(story)
                     .list(boardList)
                     .description(newTask.getDescription())
                     .deadline(newTask.getDeadline())
                     .build();
 
             return new ResponseEntity<>(taskService.create(task), HttpStatus.OK);
-        }
-        else if (newTask.getStoryId() != 0) {
-            Story story = storyService.getById(newTask.getStoryId());
-
-            if (story == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-
-            Task task = new Task.Builder(newTask.getName())
-                    .story(story)
-                    .description(newTask.getDescription())
-                    .deadline(newTask.getDeadline())
-                    .build();
-
-            return new ResponseEntity<>(taskService.create(task), HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/tasks/{id}")
