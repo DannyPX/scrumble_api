@@ -68,7 +68,9 @@ class TaskServiceTest {
         task.setScrumPoints(69);
         Task returnTask = taskService.create(task);
         returnTask.setScrumPoints(420);
+        task.setName("CreateTaskNewNameTestupdate");
         Assert.isTrue(taskService.getById(returnTask.getId()).getScrumPoints() == 420,"Update Task Failed");
+        Assert.isTrue(taskService.getById(returnTask.getId()).getName() == returnTask.getName(),"Update Task Failed");
     }
 
     @Test
