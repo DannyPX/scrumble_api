@@ -1,6 +1,7 @@
 package com.scrumble.boardapi.RestControllers;
 
 import com.scrumble.boardapi.Logic.BoardListService;
+import com.scrumble.boardapi.Logic.BoardService;
 import com.scrumble.boardapi.Models.Board;
 import com.scrumble.boardapi.Models.BoardList;
 import com.scrumble.boardapi.Resources.CreateBoardListResource;
@@ -18,6 +19,9 @@ public class BoardListController {
     @Autowired
     private BoardListService boardListService;
 
+    @Autowired
+    private BoardService boardService;
+
     @GetMapping("/lists")
     public Iterable<BoardList> getAll() {
         return boardListService.getAll();
@@ -31,7 +35,14 @@ public class BoardListController {
 
     @PostMapping("/lists")
     public ResponseEntity<BoardList> newBoardList(@RequestBody CreateBoardListResource newBoardList) {
+        Board board = boardService.getById(newBoardList.getBoardId());
+
+        if (board == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         BoardList boardList = new BoardList.Builder(newBoardList.getName())
+                .board(board)
                 .description(newBoardList.getDescription())
                 .archived(false)
                 .build();

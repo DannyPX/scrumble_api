@@ -4,6 +4,16 @@ public class CreateBoardListResource {
     private String name;
     private String description;
 
+    public int getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(int boardId) {
+        this.boardId = boardId;
+    }
+
+    private int boardId;
+
     public String getName() {
         return name;
     }
@@ -19,4 +29,6 @@ public class CreateBoardListResource {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 }
