@@ -1,6 +1,10 @@
 package com.scrumble.boardapi.RestControllers;
 
+import com.scrumble.boardapi.Logic.BoardListService;
+import com.scrumble.boardapi.Logic.StoryService;
 import com.scrumble.boardapi.Logic.TaskService;
+import com.scrumble.boardapi.Models.BoardList;
+import com.scrumble.boardapi.Models.Story;
 import com.scrumble.boardapi.Models.Task;
 import com.scrumble.boardapi.Resources.CreateTaskResource;
 import com.scrumble.boardapi.Resources.UpdateTaskResource;
@@ -17,6 +21,12 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private BoardListService boardListService;
+
+    @Autowired
+    private StoryService storyService;
+
     @GetMapping("/tasks")
     public Iterable<Task> getAll() {
         return taskService.getAll();
@@ -30,12 +40,38 @@ public class TaskController {
 
     @PostMapping("/tasks")
     public ResponseEntity<Task> newTask(@RequestBody CreateTaskResource newTask) {
-        Task task = new Task.Builder(newTask.getName())
-                .description(newTask.getDescription())
-                .deadline(newTask.getDeadline())
-                .build();
+        if (newTask.getListId() != 0) {
+            BoardList boardList = boardListService.getById(newTask.getListId());
 
-        return new ResponseEntity<>(taskService.create(task), HttpStatus.OK);
+            if (boardList == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            Task task = new Task.Builder(newTask.getName())
+                    .list(boardList)
+                    .description(newTask.getDescription())
+                    .deadline(newTask.getDeadline())
+                    .build();
+
+            return new ResponseEntity<>(taskService.create(task), HttpStatus.OK);
+        }
+        else if (newTask.getStoryId() != 0) {
+            Story story = storyService.getById(newTask.getStoryId());
+
+            if (story == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            Task task = new Task.Builder(newTask.getName())
+                    .story(story)
+                    .description(newTask.getDescription())
+                    .deadline(newTask.getDeadline())
+                    .build();
+
+            return new ResponseEntity<>(taskService.create(task), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/tasks/{id}")

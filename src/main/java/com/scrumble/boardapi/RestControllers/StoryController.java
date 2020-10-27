@@ -1,6 +1,8 @@
 package com.scrumble.boardapi.RestControllers;
 
+import com.scrumble.boardapi.Logic.BoardListService;
 import com.scrumble.boardapi.Logic.StoryService;
+import com.scrumble.boardapi.Models.BoardList;
 import com.scrumble.boardapi.Models.Story;
 import com.scrumble.boardapi.Resources.CreateStoryResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ public class StoryController {
     @Autowired
     private StoryService storyService;
 
+    @Autowired
+    private BoardListService boardListService;
+
     @GetMapping("/stories")
     public Iterable<Story> getAll() {
         return storyService.getAll();
@@ -29,7 +34,14 @@ public class StoryController {
 
     @PostMapping("/stories")
     public ResponseEntity<Story> newStory(@RequestBody CreateStoryResource newStory) {
+        BoardList list = boardListService.getById(newStory.getListId());
+
+        if (list == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
         Story story = new Story.Builder(newStory.getName())
+                .list(list)
                 .description(newStory.getDescription())
                 .archived(false)
                 .build();

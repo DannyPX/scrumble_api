@@ -1,10 +1,10 @@
 package com.scrumble.boardapi.Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table
@@ -18,6 +18,30 @@ public class BoardList {
 
     @Column
     private String description;
+
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "board_id")
+    private Board board;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "list", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Task>  tasks;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "list", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Story> stories;
+
 
     @Column
     private boolean archived;
@@ -58,6 +82,7 @@ public class BoardList {
         private final String name;
         private String description;
         private boolean archived;
+        private Board board;
 
         public Builder(String name) {
             this.name = name;
@@ -73,11 +98,17 @@ public class BoardList {
             return this;
         }
 
+        public Builder board(Board board) {
+            this.board = board;
+            return this;
+        }
+
         public BoardList build() {
             BoardList boardList = new BoardList();
             boardList.setName(name);
             boardList.setDescription(description);
             boardList.setArchived(archived);
+            boardList.setBoard(board);
             return boardList;
         }
     }

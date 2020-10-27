@@ -1,12 +1,12 @@
 package com.scrumble.boardapi.Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 import javax.print.DocFlavor;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 @Table
 @Entity
@@ -23,6 +23,20 @@ public class Board {
 
     @Column
     private LocalDate createdAt;
+
+    public Set<BoardList> getLists() {
+        return lists;
+    }
+
+    public void setLists(Set<BoardList> lists) {
+        this.lists = lists;
+    }
+
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<BoardList> lists;
+
 
     public void setName(String name) {
         this.name = name;

@@ -1,12 +1,9 @@
 package com.scrumble.boardapi.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.apache.tomcat.jni.Local;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.print.DocFlavor;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,6 +30,24 @@ public class Task {
     @Column
     private int scrumPoints;
 
+    public BoardList getList() {
+        return list;
+    }
+
+    public void setList(BoardList list) {
+        this.list = list;
+    }
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "boardList_id", nullable = true)
+    private BoardList list;
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "story_id", nullable = true)
+    private Story story;
+
     public int getId() {
         return id;
     }
@@ -51,6 +66,14 @@ public class Task {
 
     public LocalDate getDeadline() {
         return deadline;
+    }
+
+    public Story getStory() {
+        return story;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
     }
 
     public int getScrumPoints() {
@@ -83,6 +106,8 @@ public class Task {
         private boolean archived;
         private LocalDate deadline;
         private int scrumPoints;
+        private BoardList list;
+        private Story story;
 
         public Builder(String name) {
             this.name = name;
@@ -108,6 +133,16 @@ public class Task {
             return this;
         }
 
+        public Builder list(BoardList list) {
+            this.list = list;
+            return this;
+        }
+
+        public Builder story(Story story) {
+            this.story = story;
+            return this;
+        }
+
         public Task build() {
             Task task = new Task();
             task.setName(name);
@@ -115,6 +150,8 @@ public class Task {
             task.setArchived(archived);
             task.setDeadline(deadline);
             task.setScrumPoints(scrumPoints);
+            task.setList(list);
+            task.setStory(story);
             return task;
         }
     }

@@ -1,11 +1,11 @@
 package com.scrumble.boardapi.Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table
@@ -51,6 +51,31 @@ public class Story {
         return archived;
     }
 
+    public BoardList getList() {
+        return list;
+    }
+
+    public void setList(BoardList list) {
+        this.list = list;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "list_id")
+    private BoardList list;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "list", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Task> tasks;
+
     public void setArchived(boolean archived) {
         this.archived = archived;
     }
@@ -60,6 +85,8 @@ public class Story {
         private final String name;
         private String description;
         private boolean archived;
+        private BoardList list;
+        private Task task;
 
         public Builder(String name) {
             this.name = name;
@@ -80,12 +107,18 @@ public class Story {
             return this;
         }
 
+        public Builder list(BoardList list) {
+            this.list = list;
+            return this;
+        }
+
         public Story build() {
             Story story = new Story();
             story.setId(id);
             story.setName(name);
             story.setDescription(description);
             story.setArchived(archived);
+            story.setList(list);
             return story;
         }
     }
