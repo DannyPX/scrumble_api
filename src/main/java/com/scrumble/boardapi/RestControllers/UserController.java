@@ -1,5 +1,7 @@
 package com.scrumble.boardapi.RestControllers;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.scrumble.boardapi.Connections.ApiClient;
 import com.scrumble.boardapi.Logic.UserService;
 import com.scrumble.boardapi.Models.User;
 import com.scrumble.boardapi.Resources.CreateUserResource;
@@ -7,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -33,7 +37,6 @@ public class UserController {
                 .email(newUser.getEmail())
                 .password(newUser.getPassword())
                 .build();
-
         return new ResponseEntity<>(userService.create(user), HttpStatus.OK);
     }
 }

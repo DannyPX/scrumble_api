@@ -2,13 +2,13 @@ package com.scrumble.boardapi.Connections;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.scrumble.boardapi.Models.User;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ApiClient {
     private ApiClient() {
@@ -17,13 +17,13 @@ public class ApiClient {
 
     public static boolean validateToken(String token) {
         // :^)
-        boolean response = false;
+        AtomicBoolean response = new AtomicBoolean(false);
         JsonObject jsonObject1 = new JsonObject();
         jsonObject1.addProperty("token", token);
 
-        String sendData = jsonObject1.toString();;;;;;
+        String sendData = jsonObject1.toString();
         try {
-            URL url = new URL("http://localhost:8888/Register");
+            URL url = new URL("http://localhost:8888/validatetoken");
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setRequestMethod("POST");
@@ -37,8 +37,7 @@ public class ApiClient {
                     String line;
                     while ((line = bufferedReader.readLine()) != null) {
                         Gson gson = new Gson();
-                        var a = gson.fromJson(line, boolean.class);
-                        response = a;
+                        response.set(gson.fromJson(line, boolean.class));
                     }
                 }
             } else {
@@ -47,6 +46,6 @@ public class ApiClient {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        return response;
+        return response.get();
     }
 }
