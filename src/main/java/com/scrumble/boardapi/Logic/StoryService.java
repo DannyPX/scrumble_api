@@ -26,8 +26,8 @@ public class StoryService {
     }
 
     public Story getById(int id) {
-        Optional<Story> story = storyRepository.findById(id);
-        return story.isEmpty() ? null : story.get();
+        Optional<Story> getStory = storyRepository.findById(id);
+        return getStory.isEmpty() ? null : getStory.get();
     }
 
     private  Story story;
