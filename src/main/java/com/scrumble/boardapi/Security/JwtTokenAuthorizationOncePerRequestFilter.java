@@ -28,10 +28,54 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
     @Value("${jwt.http.request.header}")
     private String tokenHeader;
 
+    @Value("${jwt.inProduction}")
+    private boolean inProduction;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+        SecurityContextHolder.getContext().setAuthentication(new Authentication() {
+            boolean logedin = false;
 
-        AtomicBoolean authenticated = new AtomicBoolean(false);
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                return null;
+            }
+
+            @Override
+            public Object getCredentials() {
+                return null;
+            }
+
+            @Override
+            public Object getDetails() {
+                return null;
+            }
+
+            @Override
+            public Object getPrincipal() {
+                return null;
+            }
+
+            @Override
+            public boolean isAuthenticated() {
+                return logedin;
+            }
+
+            @Override
+            public void setAuthenticated(boolean b) throws IllegalArgumentException {
+                logedin = true;
+            }
+
+            @Override
+            public String getName() {
+                return null;
+            }
+        });
+        if (!inProduction) {
+            SecurityContextHolder.getContext().getAuthentication().setAuthenticated(true);
+            chain.doFilter(request, response);
+            return;
+        }
         logger.debug("Authentication Request For '{}'", request.getRequestURL());
 
         final String requestTokenHeader = request.getHeader(this.tokenHeader);
@@ -39,52 +83,12 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             String jwtToken = requestTokenHeader.substring(7);
             if (ApiClient.validateToken(jwtToken)) {
-                authenticated.set(true);
+                SecurityContextHolder.getContext().getAuthentication().setAuthenticated(true);
             } else {
                 logger.error("Token is invalid");
             }
         } else {
             logger.warn("JWT_TOKEN_DOES_NOT_START_WITH_BEARER_STRING");
-        }
-        if (authenticated.get()) {
-            SecurityContextHolder.getContext().setAuthentication(new Authentication() {
-                boolean logedin = false;
-                @Override
-                public Collection<? extends GrantedAuthority> getAuthorities() {
-                    return null;
-                }
-
-                @Override
-                public Object getCredentials() {
-                    return null;
-                }
-
-                @Override
-                public Object getDetails() {
-                    return null;
-                }
-
-                @Override
-                public Object getPrincipal() {
-                    return null;
-                }
-
-                @Override
-                public boolean isAuthenticated() {
-                    return logedin;
-                }
-
-                @Override
-                public void setAuthenticated(boolean b) throws IllegalArgumentException {
-                    logedin = true;
-                }
-
-                @Override
-                public String getName() {
-                    return null;
-                }
-            });
-            SecurityContextHolder.getContext().getAuthentication().setAuthenticated(true);
         }
         chain.doFilter(request, response);
     }
