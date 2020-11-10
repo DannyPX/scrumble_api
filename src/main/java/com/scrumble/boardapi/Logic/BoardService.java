@@ -4,7 +4,7 @@ import com.scrumble.boardapi.Models.Board;
 import com.scrumble.boardapi.Models.BoardList;
 import com.scrumble.boardapi.Models.BurnDownChart;
 import com.scrumble.boardapi.Models.Label;
-import com.scrumble.boardapi.Repositories.BoardRepository;
+import com.scrumble.boardapi.Repositories.IBoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class BoardService {
 
     @Autowired
-    private BoardRepository boardRepository;
+    private IBoardRepository boardRepository;
 
     //private final Board board;
 
@@ -45,27 +45,27 @@ public class BoardService {
          return boards;
     }
 
-    public boolean joinBoard(UserLogic user) {
+    public boolean joinBoard(UserService user) {
         return false;
     }
 
-    public UserLogic updateRole(UserLogic user) {
+    public UserService updateRole(UserService user) {
         throw new UnsupportedOperationException();
     }
 
-    public boolean kickMember(UserLogic user) {
+    public boolean kickMember(UserService user) {
         throw new UnsupportedOperationException();
     }
 
-    public boolean leave(UserLogic user) {
+    public boolean leave(UserService user) {
         throw new UnsupportedOperationException();
     }
 
-    public List createList(UserLogic user) {
+    public List createList(UserService user) {
         throw new UnsupportedOperationException();
     }
 
-    public StoryService createStory(UserLogic user) {
+    public StoryService createStory(UserService user) {
         throw new UnsupportedOperationException();
     }
 
@@ -81,7 +81,7 @@ public class BoardService {
         throw new UnsupportedOperationException();
     }
 
-    public List<UserLogic> getBoardMembers() {
+    public List<UserService> getBoardMembers() {
         throw new UnsupportedOperationException();
     }
 
