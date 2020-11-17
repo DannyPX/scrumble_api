@@ -81,19 +81,19 @@ public class TaskController {
         return new ResponseEntity<>(taskService.update(existing), HttpStatus.OK);
     }
 
-    @PutMapping("/lists/{id}/{TaskId}")
-    public ResponseEntity<Task> assignTask(@PathVariable("id") int id, @PathVariable("TaskId") int taskId)
+    @PutMapping("/tasks/{boardId}/{TaskId}")
+    public ResponseEntity<Task> assignToList(@PathVariable("boardId") int boardId, @PathVariable("TaskId") int taskId)
     {
-        BoardList list = boardListService.getById(id);
+        BoardList list = boardListService.getById(boardId);
         Task task = TaskService.getById(taskId);
 
         if (list == null && task == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
+        
         // TODO: check if tasks belongs to the correct board
 
-        list.addTasks(TaskService.getById(taskId));
+        task.setList(list);
         return new ResponseEntity<>(TaskService.update(task), HttpStatus.OK);
     }
 }

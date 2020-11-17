@@ -49,6 +49,7 @@ public class BoardListService {
         // Updates list information like the name and description
     }
 
+
     public boolean removeTask() throws Exception {
         throw new Exception("Not implemented");
     }
