@@ -24,8 +24,7 @@ public class BoardListController {
     @Autowired
     private BoardService boardService;
 
-    @Autowired
-    private TaskService TaskService;
+
 
     @GetMapping("/lists")
     public Iterable<BoardList> getAll() {
@@ -69,16 +68,5 @@ public class BoardListController {
         return new ResponseEntity<>(boardListService.update(existing), HttpStatus.OK);
     }
 
-    @PutMapping("/lists/{id}/{Task}")
-    public ResponseEntity<BoardList> assignTask(@PathVariable("Task") Task task, @PathVariable("id") int id, @RequestBody UpdateBoardListResource newBoardList)
-    {
-        BoardList listExists = boardListService.getById(id);
-        Task taskExists = TaskService.getById(task.getId());
 
-        if (listExists == null && taskExists == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        listExists.getTasks().add(task);
-        return new ResponseEntity<>(boardListService.update(listExists), HttpStatus.OK);
-    }
 }
