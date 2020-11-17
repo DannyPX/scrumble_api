@@ -1,6 +1,7 @@
 package com.scrumble.boardapi.Logic;
 
 import com.scrumble.boardapi.Models.BoardList;
+import com.scrumble.boardapi.Models.Task;
 import com.scrumble.boardapi.Repositories.IBoardListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,10 +46,7 @@ public class BoardListService {
 
     public boolean updateList() throws Exception {
         throw new Exception("Not implemented");
-    }
-
-    public boolean assignTask() throws Exception {
-        throw new Exception("Not implemented");
+        // Updates list information like the name and description
     }
 
     public boolean removeTask() throws Exception {

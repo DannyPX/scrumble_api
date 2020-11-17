@@ -4,6 +4,7 @@ import com.scrumble.boardapi.Logic.BoardListService;
 import com.scrumble.boardapi.Logic.BoardService;
 import com.scrumble.boardapi.Models.Board;
 import com.scrumble.boardapi.Models.BoardList;
+import com.scrumble.boardapi.Models.Task;
 import com.scrumble.boardapi.Resources.CreateBoardListResource;
 import com.scrumble.boardapi.Resources.UpdateBoardListResource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,18 @@ public class BoardListController {
         existing.setName(newBoardList.getName());
         existing.setDescription(newBoardList.getDescription());
 
+        return new ResponseEntity<>(boardListService.update(existing), HttpStatus.OK);
+    }
+
+    @PutMapping("/lists/{id}/{Task}")
+    public ResponseEntity<BoardList> assignTask(@PathVariable("Task") Task task, @PathVariable("id") int id, @RequestBody UpdateBoardListResource newBoardList)
+    {
+        BoardList existing = boardListService.getById(id);
+
+        if (existing == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        existing.getTasks().add(task);
         return new ResponseEntity<>(boardListService.update(existing), HttpStatus.OK);
     }
 }
