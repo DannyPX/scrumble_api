@@ -34,6 +34,14 @@ public class BoardList {
     @JoinColumn(name = "board_id")
     private Board board;
 
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     @JsonBackReference
     @OneToMany(mappedBy = "list", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Task>  tasks;
