@@ -90,8 +90,6 @@ public class TaskController {
         if (list == null && task == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        
-        // TODO: check if tasks belongs to the correct board
 
         task.setList(list);
         return new ResponseEntity<>(TaskService.update(task), HttpStatus.OK);
