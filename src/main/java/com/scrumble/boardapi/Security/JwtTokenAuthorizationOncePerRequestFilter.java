@@ -1,6 +1,7 @@
 package com.scrumble.boardapi.Security;
 
 import com.scrumble.boardapi.Connections.ApiClient;
+import com.scrumble.boardapi.Models.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,56 +34,101 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-        SecurityContextHolder.getContext().setAuthentication(new Authentication() {
-            boolean logedin = false;
-
-            @Override
-            public Collection<? extends GrantedAuthority> getAuthorities() {
-                return null;
-            }
-
-            @Override
-            public Object getCredentials() {
-                return null;
-            }
-
-            @Override
-            public Object getDetails() {
-                return null;
-            }
-
-            @Override
-            public Object getPrincipal() {
-                return null;
-            }
-
-            @Override
-            public boolean isAuthenticated() {
-                return logedin;
-            }
-
-            @Override
-            public void setAuthenticated(boolean b) throws IllegalArgumentException {
-                logedin = true;
-            }
-
-            @Override
-            public String getName() {
-                return null;
-            }
-        });
         if (!inProduction) {
+
+            SecurityContextHolder.getContext().setAuthentication(new Authentication() {
+                boolean logedin = false;
+
+                @Override
+                public Collection<? extends GrantedAuthority> getAuthorities() {
+                    return null;
+                }
+
+                @Override
+                public Object getCredentials() {
+                    return null;
+                }
+
+                @Override
+                public Object getDetails() {
+                    User user = new User();
+                    user.setUsername("Developer");
+                    return user;
+                }
+
+                @Override
+                public Object getPrincipal() {
+                    return null;
+                }
+
+                @Override
+                public boolean isAuthenticated() {
+                    return logedin;
+                }
+
+                @Override
+                public void setAuthenticated(boolean b) throws IllegalArgumentException {
+                    logedin = true;
+                }
+
+                @Override
+                public String getName() {
+                    return null;
+                }
+            });
             SecurityContextHolder.getContext().getAuthentication().setAuthenticated(true);
             chain.doFilter(request, response);
             return;
         }
-        logger.debug("Authentication Request For '{}'", request.getRequestURL());
 
         final String requestTokenHeader = request.getHeader(this.tokenHeader);
 
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             String jwtToken = requestTokenHeader.substring(7);
             if (ApiClient.validateToken(jwtToken)) {
+                SecurityContextHolder.getContext().setAuthentication(new Authentication() {
+                    boolean logedin = false;
+                    String username = "";
+
+                    @Override
+                    public Collection<? extends GrantedAuthority> getAuthorities() {
+                        return null;
+                    }
+
+                    @Override
+                    public Object getCredentials() {
+                        return null;
+                    }
+
+                    @Override
+                    public Object getDetails() {
+                        User user = new User();
+                        user.setUsername(username);
+                        return user;
+                    }
+
+                    @Override
+                    public Object getPrincipal() {
+                        return null;
+                    }
+
+                    @Override
+                    public boolean isAuthenticated() {
+                        return logedin;
+                    }
+
+                    @Override
+                    public void setAuthenticated(boolean b) throws IllegalArgumentException {
+                        logedin = true;
+                        username = ApiClient.getUsernameFromToken(jwtToken);
+                    }
+
+                    @Override
+                    public String getName() {
+                        return username;
+                    }
+
+                });
                 SecurityContextHolder.getContext().getAuthentication().setAuthenticated(true);
             } else {
                 logger.error("Token is invalid");

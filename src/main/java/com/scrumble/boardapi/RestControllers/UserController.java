@@ -8,6 +8,7 @@ import com.scrumble.boardapi.Resources.CreateUserResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -34,8 +35,6 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> newUser(@RequestBody CreateUserResource newUser) {
         User user = new User.Builder(newUser.getUsername())
-                .email(newUser.getEmail())
-                .password(newUser.getPassword())
                 .build();
         return new ResponseEntity<>(userService.create(user), HttpStatus.OK);
     }
