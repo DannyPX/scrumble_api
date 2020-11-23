@@ -38,8 +38,8 @@ public class BoardList {
         return tasks;
     }
 
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
+    public void addTasks(Task task) {
+        this.tasks.add(task);
     }
 
     @JsonBackReference

@@ -27,6 +27,9 @@ public class TaskController {
     @Autowired
     private StoryService storyService;
 
+    @Autowired
+    private TaskService TaskService;
+
     @GetMapping("/tasks")
     public Iterable<Task> getAll() {
         return taskService.getAll();
@@ -37,6 +40,8 @@ public class TaskController {
         Task task = taskService.getById(id);
         return task != null ? new ResponseEntity<>( taskService.getById(id), HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+
 
     @PostMapping("/tasks")
     public ResponseEntity<Task> newTask(@RequestBody CreateTaskResource newTask) {
@@ -74,5 +79,19 @@ public class TaskController {
         existing.setDescription(newTask.getDescription());
 
         return new ResponseEntity<>(taskService.update(existing), HttpStatus.OK);
+    }
+
+    @PutMapping("/tasks/{boardId}/{TaskId}")
+    public ResponseEntity<Task> assignToList(@PathVariable("boardId") int boardId, @PathVariable("TaskId") int taskId)
+    {
+        BoardList list = boardListService.getById(boardId);
+        Task task = TaskService.getById(taskId);
+
+        if (list == null && task == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        task.setList(list);
+        return new ResponseEntity<>(TaskService.update(task), HttpStatus.OK);
     }
 }

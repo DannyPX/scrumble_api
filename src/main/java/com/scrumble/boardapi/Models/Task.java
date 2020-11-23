@@ -38,6 +38,10 @@ public class Task {
         this.list = list;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "boardList_id", nullable = true)
