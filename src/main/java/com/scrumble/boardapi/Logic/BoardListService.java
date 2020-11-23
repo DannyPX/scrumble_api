@@ -1,7 +1,7 @@
 package com.scrumble.boardapi.Logic;
 
+import com.scrumble.boardapi.Models.Board;
 import com.scrumble.boardapi.Models.BoardList;
-import com.scrumble.boardapi.Models.Task;
 import com.scrumble.boardapi.Repositories.IBoardListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,6 @@ public class BoardListService {
 
     @Autowired
     private IBoardListRepository boardListRepository;
-
-    public BoardListService() {}
 
     public BoardList create(BoardList boardList) {
         return boardListRepository.save(boardList);
@@ -37,27 +35,7 @@ public class BoardListService {
         return boardListRepository.save(boardList);
     }
 
-    private  BoardList boardList;
-
-    BoardListService(BoardList boardList)
-    {
-        this.boardList = boardList;
-    }
-
-    public boolean updateList() throws Exception {
-        throw new Exception("Not implemented");
-        // Updates list information like the name and description
-    }
-
-    public boolean removeTask() throws Exception {
-        throw new Exception("Not implemented");
-    }
-
-    public TaskService[] getTasks() throws Exception {
-        throw new Exception("Not implemented");
-    }
-
-    public TaskService[] getStories() throws Exception {
-        throw new Exception("Not implemented");
+    public List<BoardList> getByBoardId(Board board) {
+        return boardListRepository.findByBoard(board);
     }
 }

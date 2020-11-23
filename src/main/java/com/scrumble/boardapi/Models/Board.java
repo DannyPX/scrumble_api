@@ -24,18 +24,18 @@ public class Board {
     @Column
     private LocalDate createdAt;
 
-    public Set<BoardList> getLists() {
+    public List<BoardList> getLists() {
         return lists;
     }
 
-    public void setLists(Set<BoardList> lists) {
+    public void setLists(List<BoardList> lists) {
         this.lists = lists;
     }
 
 
     @JsonBackReference
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<BoardList> lists;
+    private List<BoardList> lists;
 
 
     public void setName(String name) {

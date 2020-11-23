@@ -93,12 +93,12 @@ class BoardServiceTest {
         throw new NotYetImplementedException("This method is not yet implemented");
     }
 
-    @Test
-    void getBoardMembers() {
-        Assert.isTrue(boardService.getBoardMembers().stream().count() > 0, "Board should always have 1 or more members");
-
-        throw new NotYetImplementedException("This method is not yet implemented");
-    }
+//    @Test
+//    void getBoardMembers() {
+//        Assert.isTrue(boardService.getBoardMembers().stream().count() > 0, "Board should always have 1 or more members");
+//
+//        throw new NotYetImplementedException("This method is not yet implemented");
+//    }
 
     @Test
     void getLists() {
