@@ -131,7 +131,6 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
                 });
                 SecurityContextHolder.getContext().getAuthentication().setAuthenticated(true);
                 int id = ((User)SecurityContextHolder.getContext().getAuthentication().getDetails()).getId();
-                tokenUtil.getUsernameFromToken(": ");
             } else {
                 logger.error("Token is invalid");
             }
