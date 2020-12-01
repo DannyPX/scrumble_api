@@ -2,6 +2,7 @@ package com.scrumble.boardapi.Security;
 
 import com.scrumble.boardapi.Connections.ApiClient;
 import com.scrumble.boardapi.Models.User;
+import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,8 +52,7 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
 
                 @Override
                 public Object getDetails() {
-                    User user = new User();
-                    user.setUsername("Developer");
+                    User user = new User(0, "Developer");
                     return user;
                 }
 
@@ -82,7 +82,7 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
         }
 
         final String requestTokenHeader = request.getHeader(this.tokenHeader);
-
+        JwtTokenUtil tokenUtil = new JwtTokenUtil();
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             String jwtToken = requestTokenHeader.substring(7);
             if (ApiClient.validateToken(jwtToken)) {
@@ -102,8 +102,8 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
 
                     @Override
                     public Object getDetails() {
-                        User user = new User();
-                        user.setUsername(username);
+
+                        User user = new User(Integer.parseInt(tokenUtil.getClaimFromToken(jwtToken, Claims::getId)),username); //todo id Rob Bram
                         return user;
                     }
 
@@ -130,6 +130,8 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
 
                 });
                 SecurityContextHolder.getContext().getAuthentication().setAuthenticated(true);
+                int id = ((User)SecurityContextHolder.getContext().getAuthentication().getDetails()).getId();
+                tokenUtil.getUsernameFromToken(": ");
             } else {
                 logger.error("Token is invalid");
             }
