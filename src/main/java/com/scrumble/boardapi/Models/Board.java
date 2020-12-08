@@ -1,6 +1,7 @@
 package com.scrumble.boardapi.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.print.DocFlavor;
@@ -32,6 +33,11 @@ public class Board {
         this.lists = lists;
     }
 
+
+    @JsonManagedReference
+    @ManyToOne
+    @JoinColumn(name = "owner_id", nullable = true)
+    private User owner;
 
     @JsonBackReference
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
