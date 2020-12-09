@@ -1,6 +1,7 @@
 package com.scrumble.boardapi.Models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -39,7 +40,8 @@ public class Board {
     @JoinColumn(name = "owner_id", nullable = true)
     private User owner;
 
-    @JsonBackReference
+    @JsonManagedReference
+    @JsonInclude
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<BoardList> lists;
 

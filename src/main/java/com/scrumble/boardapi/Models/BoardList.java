@@ -29,7 +29,7 @@ public class BoardList {
     }
 
 
-    @JsonManagedReference
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "board_id")
     private Board board;
@@ -42,7 +42,7 @@ public class BoardList {
         this.tasks.add(task);
     }
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "list", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Task>  tasks;
 

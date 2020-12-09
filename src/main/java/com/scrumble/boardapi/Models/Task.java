@@ -1,5 +1,6 @@
 package com.scrumble.boardapi.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.apache.tomcat.jni.Local;
 
@@ -42,12 +43,12 @@ public class Task {
         this.id = id;
     }
 
-    @JsonManagedReference
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "boardList_id", nullable = true)
     private BoardList list;
 
-    @JsonManagedReference
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "story_id", nullable = true)
     private Story story;
