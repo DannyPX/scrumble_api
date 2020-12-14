@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BoardService {
@@ -28,6 +26,7 @@ public class BoardService {
 
     public Board create(final Board board) {
         board.setCreatedAt(LocalDate.now());
+        board.setLists((List<BoardList>) initializeDefaultScrumTemplate(board));
         return boardRepository.save(board);
     }
 
@@ -61,5 +60,28 @@ public class BoardService {
         var boards = new ArrayList<Board>();
         boardRepository.findAll().forEach(boards::add);
         return boards;
+    }
+
+    private Set<BoardList> initializeDefaultScrumTemplate(Board board){
+        Set<BoardList> lists = new HashSet<>();
+
+
+        // initialize list values
+        BoardList todo = new BoardList();
+        todo.setName("Todo");
+        todo.setDescription("List with things to do");
+
+        BoardList inProgress = new BoardList();
+        inProgress.setName("In progress");
+        inProgress.setDescription("List with things in progress");
+
+        BoardList done = new BoardList();
+        done.setName("Done");
+        done.setDescription("List with things done");
+
+        lists.add(todo);
+        lists.add(inProgress);
+        lists.add(done);
+        return lists;
     }
 }
