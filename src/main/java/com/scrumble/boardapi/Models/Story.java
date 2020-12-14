@@ -67,7 +67,7 @@ public class Story {
         this.tasks = tasks;
     }
 
-    @JsonManagedReference
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "list_id")
     private BoardList list;

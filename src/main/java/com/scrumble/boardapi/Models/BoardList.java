@@ -46,7 +46,7 @@ public class BoardList {
     @OneToMany(mappedBy = "list", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Task>  tasks;
 
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "list", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Story> stories;
 
