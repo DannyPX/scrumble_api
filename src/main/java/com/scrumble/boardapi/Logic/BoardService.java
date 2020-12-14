@@ -26,7 +26,7 @@ public class BoardService {
 
     public Board create(final Board board) {
         board.setCreatedAt(LocalDate.now());
-        board.setLists((List<BoardList>) initializeDefaultScrumTemplate(board));
+        board.setLists(initializeDefaultScrumTemplate());
         return boardRepository.save(board);
     }
 
@@ -62,9 +62,8 @@ public class BoardService {
         return boards;
     }
 
-    private Set<BoardList> initializeDefaultScrumTemplate(Board board){
-        Set<BoardList> lists = new HashSet<>();
-
+    private List<BoardList> initializeDefaultScrumTemplate(){
+        List<BoardList> lists = new ArrayList<>();
 
         // initialize list values
         BoardList todo = new BoardList();
