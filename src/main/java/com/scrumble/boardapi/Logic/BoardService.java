@@ -26,9 +26,8 @@ public class BoardService {
 
     public Board create(final Board board) {
         board.setCreatedAt(LocalDate.now());
-        IBoardRepository boardRepo = (IBoardRepository) boardRepository.save(board);
-        board.setLists(initializeDefaultScrumTemplate((Board) boardRepo));
-        return (Board) boardRepo;
+        //board.setLists(initializeDefaultScrumTemplate(board));
+        return boardRepository.save(board);
     }
 
     public Board getById(int id) {
@@ -63,7 +62,7 @@ public class BoardService {
         return boards;
     }
 
-    private List<BoardList> initializeDefaultScrumTemplate(Board board){
+    public void initializeDefaultScrumTemplate(Board board){
         List<BoardList> lists = new ArrayList<>();
 
         // initialize list values
@@ -85,7 +84,5 @@ public class BoardService {
         lists.add(todo);
         lists.add(inProgress);
         lists.add(done);
-        boardRepository.save(board);
-        return lists;
     }
 }

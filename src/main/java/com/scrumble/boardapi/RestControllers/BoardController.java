@@ -45,7 +45,9 @@ public class BoardController {
                 .description(board.getDescription())
                 .build();
 
-        return new ResponseEntity<>(boardService.create(newBoard), HttpStatus.OK);
+        Board createdBoard = boardService.create(newBoard);
+        boardService.initializeDefaultScrumTemplate(createdBoard);
+        return new ResponseEntity<>(createdBoard, HttpStatus.OK);
     }
 
 //    @DeleteMapping("/boards/{id}")
