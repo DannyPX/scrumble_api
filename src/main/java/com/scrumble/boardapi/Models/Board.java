@@ -34,7 +34,6 @@ public class Board {
         this.lists = lists;
     }
 
-
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = true)

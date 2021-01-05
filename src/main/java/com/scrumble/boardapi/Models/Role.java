@@ -4,5 +4,5 @@ public enum Role {
     NONE,
     VIEWER,
     MEMBER,
-    ADMINISTRATOR
+    OWNER
 }
