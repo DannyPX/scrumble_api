@@ -12,3 +12,4 @@ public class BoardapiApplication {
 		SpringApplication.run(BoardapiApplication.class, args);
 	}
 }
+

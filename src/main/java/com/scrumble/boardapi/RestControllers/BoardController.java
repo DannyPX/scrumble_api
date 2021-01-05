@@ -41,6 +41,10 @@ public class BoardController {
 
     @PostMapping("/boards")
     ResponseEntity<Board> newBoard(@RequestBody final CreateBoardResource board) {
+        if (board.getName().isBlank() || board.getName().isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         Board newBoard = new Board.Builder(board.getName())
                 .description(board.getDescription())
                 .build();
