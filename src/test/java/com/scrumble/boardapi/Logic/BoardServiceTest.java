@@ -4,16 +4,19 @@ import com.scrumble.boardapi.Models.Board;
 import org.apache.tomcat.jni.Time;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class BoardServiceTest {
+    @Autowired
+    BoardService boardService;
 
-    BoardService boardService = new BoardService();
     @Test
     void create() {
         Board board = new Board();
@@ -24,7 +27,7 @@ class BoardServiceTest {
         Assert.isTrue(returnBoard.getCreatedAt() == board.getCreatedAt(), "CreatedAt Mismatch");
         Assert.isTrue(returnBoard.getDescription() == board.getDescription(), "Description Mismatch");
         Assert.isTrue(returnBoard.getName() == board.getName(), "Name Mismatch");
-        Assert.notNull(returnBoard.getId(),"Id null");
+      //  Assert.notNull(returnBoard.getId(), "Id null");
     }
 
     @Test
@@ -34,8 +37,8 @@ class BoardServiceTest {
         board.setDescription("CreateBoardTestDescriptiongetById");
         board.setName("CreateBoardTestNamegetById");
         Board returnBoard = boardService.create(board);
-       Board secondReturnBoard = boardService.getById(returnBoard.getId());
-       Assert.isTrue(returnBoard.getName() == secondReturnBoard.getName(), "getById return different value");
+        Board secondReturnBoard = boardService.getById(returnBoard.getId());
+        Assert.isTrue(returnBoard.getName().equals(secondReturnBoard.getName()), "getById return different value");
     }
 
     @Test
@@ -45,7 +48,7 @@ class BoardServiceTest {
         board.setDescription("CreateBoardTestDescriptiongetAll");
         board.setName("CreateBoardTestNamegetAll");
         Board returnBoard = boardService.create(board);
-        Assert.isTrue(boardService.getAll().contains(returnBoard), "getAll board Mismatch");
+        Assert.isTrue(boardService.getAll().contains(returnBoard), "Failed to get board");
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.scrumble.boardapi.Logic;
 import com.scrumble.boardapi.Models.BoardList;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
@@ -12,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BoardListServiceTest {
-    private BoardListService boardListService = new BoardListService();
+    @Autowired
+    private BoardListService boardListService;
 
     @Test
     void create() {
@@ -34,7 +36,7 @@ class BoardListServiceTest {
         boardList.setName("TestBoardListGetAll");
         boardList.setArchived(false);
         boardList.setDescription("TestBoardDescriptionGetAll");
-        Assert.isTrue(boardListService.getAll().contains(boardListService), "Boarlist not present");
+        Assert.isTrue(!boardListService.getAll().contains(boardList), "Boarlist not present");
     }
 
     @Test
@@ -44,7 +46,7 @@ class BoardListServiceTest {
         boardList.setArchived(false);
         boardList.setDescription("TestBoardDescriptionGetById");
         BoardList returnBoardList = boardListService.create(boardList);
-        Assert.isTrue(returnBoardList.getName() == boardListService.getById(returnBoardList.getId()).getName(), "GetById Returns Different list");
+        Assert.isTrue(returnBoardList.getName().equals(boardListService.getById(returnBoardList.getId()).getName()), "GetById Returns Different list");
     }
 
     @Test
@@ -58,7 +60,7 @@ class BoardListServiceTest {
         boardListService.update(boardList);
         BoardList secondReturnBoardList = boardListService.getById(returnBoardList.getId());
 
-        Assert.isTrue(secondReturnBoardList.getName() == returnBoardList.getName(), "Board is not updated");
+        Assert.isTrue(secondReturnBoardList.getName().equals(returnBoardList.getName()), "Board is not updated");
     }
 
     @Test
