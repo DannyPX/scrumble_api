@@ -3,6 +3,7 @@ package com.scrumble.boardapi.Logic;
 import com.scrumble.boardapi.Models.Story;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
@@ -10,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class StoryServiceTest {
-    private StoryService storyService = new StoryService();
+    @Autowired
+    private StoryService storyService;
 
     @Test
     void create() {
@@ -19,10 +21,9 @@ class StoryServiceTest {
         story.setDescription("StoryDescriptionTest");
         story.setName("StoryNameTest");
        Story returnStory = storyService.create(story);
-        Assert.isTrue(story.getDescription() == returnStory.getDescription(), "Description mismatch");
-        Assert.isTrue(story.getName() == returnStory.getName(), "Name mismatch");
+        Assert.isTrue(story.getDescription().equals(returnStory.getDescription()), "Description mismatch");
+        Assert.isTrue(story.getName().equals(returnStory.getName()), "Name mismatch");
         Assert.isTrue(story.isArchived() == returnStory.isArchived(), "IsArchived mismatch");
-        Assert.notNull(story.getId(), "Id not created");
     }
 
     @Test
@@ -42,7 +43,7 @@ class StoryServiceTest {
         story.setDescription("StoryDescriptionTestgetById");
         story.setName("StoryNameTestgetById");
         Story returnStory = storyService.create(story);
-        Assert.isTrue(storyService.getById(returnStory.getId()) == returnStory, "Stories mismatch in getByid");
+        Assert.isTrue(storyService.getById(returnStory.getId()).getName().equals(returnStory.getName()), "Stories mismatch in getByid");
     }
 
     @Test
